@@ -4,7 +4,7 @@
 name: Pytest Unit Testing CI
 
 on:
-  # The workflow runs on push events targeting the 'main' branch.
+  # The workflow runs on push events targeting the 'main' branch..
   push:
     branches: [ main ]
   # It also runs on pull requests targeting 'main', which is good practice.
