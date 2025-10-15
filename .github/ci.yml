@@ -1,0 +1,42 @@
+# This workflow is for Assignment 3, integrating Pytest unit testing into Continuous Integration (CI).
+# It will automatically run all your unit tests on the cloud every time code is pushed.
+
+name: Pytest Unit Testing CI
+
+on:
+  # The workflow runs on push events targeting the 'main' branch.
+  push:
+    branches: [ main ]
+  # It also runs on pull requests targeting 'main', which is good practice.
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-unit-tests:
+    # Use a standard GitHub-hosted runner (Ubuntu is the fastest/most common for Python).
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      # This action fetches your code from the repository.
+      uses: actions/checkout@v4
+
+    - name: Set up Python Environment
+      # This action sets up the correct Python version (3.10 is standard and stable).
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+
+    - name: Install Pytest Dependency
+      # Install Pytest and other required packages (if any are listed in requirements.txt).
+      # For this assignment, we primarily need pytest.
+      run: pip install pytest
+
+    - name: Run Pytest Unit Tests
+      # This is the core step. 'pytest -v' runs all tests and provides verbose output.
+      # Pytest automatically discovers files matching 'test_*.py' (like 'tests/test_app.py').
+      run: pytest -v
+      
+    # NOTE FOR DEMONSTRATION: 
+    # To fulfill Deliverable 4, you must ensure your tests/test_app.py 
+    # is set to the PASSING state before you push this file.
